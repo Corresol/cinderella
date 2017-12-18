@@ -1,0 +1,52 @@
+=== ALL RESPONSES ===
+status=SUCCESS|ERROR|EXCEPTION
+
+=== SUCCESS RESPONSE ===
+data
+    - user_id
+	- ...
+
+=== ERR RESPONSE ===
+data
+    - code
+    - message
+
+=== EXCEPTION RESPONSE ===
+data
+	- message
+	- code
+	- file
+	- line
+	- trace
+
+##################################################
+##### HISTORY ####################################
+##################################################
+
+/api/wallet/history - POST
+
+--- REQUEST --------------------------------------
+api_token
+
+--- RESPONSE -------------------------------------
+data
+    - user_id
+    - history
+        - transaction_id
+        - time
+        - type (sent / received)
+        - amount
+        - addresses (separated by comma)
+
+##################################################
+##### SPEND ######################################
+##################################################
+
+/api/wallet/spend - POST
+
+--- REQUEST --------------------------------------
+api_token, amount, address
+
+--- VALIDATION RULES -----------------------------
+amount: required, numeric
+address: required, valid BTC address
