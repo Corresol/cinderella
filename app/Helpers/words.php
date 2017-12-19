@@ -17,6 +17,6 @@ if (!function_exists('random_words')){
 if (!function_exists('get_recovery_phrase')){
     function get_recovery_phrase()
     {
-        return random_words(8);
+        return random_words(12);
     }
 }
