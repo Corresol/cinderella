@@ -19,7 +19,7 @@ class Users extends Migration
             $table->date('created');
             $table->string('phone', 15);
             $table->string('pin', 60);
-            $table->string('recovery_phrase', 64);
+            $table->string('recovery_phrase', 255);
             $table->mediumInteger('last_address', FALSE, TRUE);
             $table->date('premium_news')->nullable()->default(NULL);
 
