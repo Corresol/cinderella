@@ -141,16 +141,23 @@ class WalletController extends Controller
         try{
             $response = $this->user->withdraw($amount, $address);
         }catch(\Exception $e){
-            // return $this->user->checkNetworkFee($amount, $address);
 
-            return [
-                'status' => 'ERROR',
-                'data' => [
-                    'code' => 21,
-                    'message' => 'Withdraw Error',
-                    'network_fee' => ''
-                ]
-            ];
+            // If error caused network fee
+            if(strpos($e->getMessage(),'Network Fee') !== false){
+                $output = array();
+                preg_match_all('/[0-9.]+(.)/',$e->getMessage(),$output);
+    
+                $network_fee = trim($output[0][0]);
+
+                return [
+                    'status' => 'ERROR',
+                    'data' => [
+                        'code' => 21,
+                        'message' => 'Withdraw Error Network Fee',
+                        'network_fee' => $network_fee
+                    ]
+                ];
+            }
 
             return $this::sendError(\APIError::WITHDRAW_ERROR);
         }
