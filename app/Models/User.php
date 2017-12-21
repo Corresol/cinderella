@@ -121,6 +121,16 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $response;
     }
 
+    public function checkNetworkFee($amount, $to){
+        $response = app('BlockIo')->get_network_fee_estimate([
+            'amounts' => $amount,
+            'from_labels' => $this->getAllLabels(),
+            'to_addresses' => $to
+        ]);
+
+        return $response;
+    }
+
     private function getAllLabels()
     {
         $labels = [];

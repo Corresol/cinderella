@@ -135,8 +135,25 @@ class WalletController extends Controller
 
         $amount  = $request->get('amount');
         $address = $request->get('address');
+        
+        $response = (object) [];
 
-        $response = $this->user->withdraw($amount, $address);
+        try{
+            $response = $this->user->withdraw($amount, $address);
+        }catch(\Exception $e){
+            // return $this->user->checkNetworkFee($amount, $address);
+
+            return [
+                'status' => 'ERROR',
+                'data' => [
+                    'code' => 21,
+                    'message' => 'Withdraw Error',
+                    'network_fee' => ''
+                ]
+            ];
+
+            return $this::sendError(\APIError::WITHDRAW_ERROR);
+        }
 
         if ($response->status == 'success'){
             $data = $response->data;

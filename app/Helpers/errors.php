@@ -10,6 +10,7 @@ abstract class APIError
     const INVALID_OLD_PIN = ['code' => 12, 'message' => 'Old PIN is invalid'];
 
     const WITHDRAW_ERROR = ['code' => 20, 'message' => 'Withdrawal error'];
+    const WITHDRAW_ERROR_NETWORK_FEE = ['code' => 21, 'message' => 'Withdrawal error insuficient active balance'];
 
     const CODE_ALREADY_SENT = ['code' => 30, 'message' => 'Code already sent'];
     const WRONG_CODE = ['code' => 31, 'message' => 'Wrong code provided'];
