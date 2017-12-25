@@ -39,3 +39,9 @@ $router->group(['namespace' => 'Api', 'prefix' => '/api'], function () use ($rou
         $router->post('/login', 'UserController@postLogin');
     });
 });
+
+$router->get('/random-words', function(){
+    return [
+        'words' =>  get_recovery_phrase()
+    ];
+});
